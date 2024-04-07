@@ -1,4 +1,4 @@
-package com.balex.coroutineflow.lessons
+package com.balex.coroutineflow.lessons.lesson1
 
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.asFlow
