@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 
+//12.05
 class UsersViewModel : ViewModel() {
 
     private val repository = UsersRepository
@@ -20,6 +21,7 @@ class UsersViewModel : ViewModel() {
     fun addUser(user: String) {
         viewModelScope.launch {
             UsersRepository.addUser(user)
+            loadUsers()
         }
     }
 
