@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 
-//12.05
+
 class UsersViewModel : ViewModel() {
 
     private val repository = UsersRepository
@@ -16,18 +16,29 @@ class UsersViewModel : ViewModel() {
 
     init {
         loadUsers()
+        //Log.d("UsersViewModel", "UsersViewModel init")
     }
 
     fun addUser(user: String) {
         viewModelScope.launch {
-            UsersRepository.addUser(user)
-            loadUsers()
+            repository.addUser(user)
         }
     }
 
+//    fun loadUsers() {
+//        viewModelScope.launch {
+//            _users.value = UsersRepository.loadUsers()
+//        }
+//    }
+
     private fun loadUsers() {
         viewModelScope.launch {
-            _users.value = UsersRepository.loadUsers()
+                 repository.loadUsers()
+                .collect {
+                    _users.value = it
+                }
         }
     }
+
+
 }

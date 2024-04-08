@@ -48,4 +48,9 @@ class UsersActivity : AppCompatActivity() {
 
         fun newIntent(context: Context) = Intent(context, UsersActivity::class.java)
     }
+
+//    override fun onResume() {
+//        super.onResume()
+//        viewModel.loadUsers()
+//    }
 }
