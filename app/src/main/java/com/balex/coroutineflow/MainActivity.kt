@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.balex.coroutineflow.databinding.ActivityMainBinding
 import com.balex.coroutineflow.lessons.lesson2.UsersActivity
+import com.balex.coroutineflow.crypto_app.CryptoActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -16,6 +17,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         binding.buttonUsersActivity.setOnClickListener {
             startActivity(UsersActivity.newIntent(this))
+        }
+        binding.buttonCryptoActivity.setOnClickListener {
+            startActivity(CryptoActivity.newIntent(this))
         }
     }
 }
