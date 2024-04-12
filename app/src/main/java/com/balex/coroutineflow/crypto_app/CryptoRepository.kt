@@ -10,7 +10,6 @@ object CryptoRepository {
     private val currencyNames = listOf("BTC", "ETH", "USDT", "BNB", "USDC")
     private val currencyList = mutableListOf<Currency>()
 
-
     fun getCurrencyList(): Flow<List<Currency>> = flow {
         while (true) {
             delay(3000)
