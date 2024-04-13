@@ -43,24 +43,25 @@ class CryptoActivity : AppCompatActivity() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.RESUMED) {
                 viewModel.state
-                    .collect() {
-                    when (it) {
-                        is State.Initial -> {
-                            binding.progressBarLoading.isVisible = false
-                        }
-                        is State.Loading -> {
-                            binding.progressBarLoading.isVisible = true
-                        }
-                        is State.Content -> {
-                            binding.progressBarLoading.isVisible = false
-                            adapter.submitList(it.currencyList)
+                    .collect {
+                        when (it) {
+                            is State.Initial -> {
+                                binding.progressBarLoading.isVisible = false
+                                binding.buttonRefreshList.isEnabled = false
+                            }
+                            is State.Loading -> {
+                                binding.progressBarLoading.isVisible = true
+                                binding.buttonRefreshList.isEnabled = false
+                            }
+                            is State.Content -> {
+                                binding.progressBarLoading.isVisible = false
+                                binding.buttonRefreshList.isEnabled = true
+                                adapter.submitList(it.currencyList)
+                            }
                         }
                     }
-                }
             }
-
         }
-
     }
 
     companion object {
