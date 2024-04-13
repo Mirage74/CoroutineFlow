@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.balex.coroutineflow.databinding.ActivityMainBinding
 import com.balex.coroutineflow.lessons.lesson2.UsersActivity
 import com.balex.coroutineflow.crypto_app.CryptoActivity
+import com.balex.coroutineflow.team_score.TeamScoreActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -20,6 +21,9 @@ class MainActivity : AppCompatActivity() {
         }
         binding.buttonCryptoActivity.setOnClickListener {
             startActivity(CryptoActivity.newIntent(this))
+        }
+        binding.teamScoreActivity.setOnClickListener {
+            startActivity(TeamScoreActivity.newIntent(this))
         }
     }
 }
