@@ -1,13 +1,13 @@
 package com.balex.coroutineflow.team_score
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 
 class TeamScoreViewModel : ViewModel() {
 
-    private val _state = MutableLiveData<TeamScoreState>(TeamScoreState.Game(0, 0))
-    val state: LiveData<TeamScoreState> = _state
+    private val _state = MutableStateFlow<TeamScoreState>(TeamScoreState.Game(0, 0))
+    val state = _state.asStateFlow()
 
     fun increaseScore(team: Team) {
         val currentState = _state.value
@@ -17,25 +17,31 @@ class TeamScoreViewModel : ViewModel() {
                 val newValue = oldValue + 1
                 _state.value = currentState.copy(score1 = newValue)
                 if (newValue >= WINNER_SCORE) {
-                    _state.value = TeamScoreState.Winner(
-                        winnerTeam = Team.TEAM_1,
-                        newValue,
-                        currentState.score2
-                    )
+                    _state.value =
+                        TeamScoreState.Winner(
+                            winnerTeam = Team.TEAM_1,
+                            newValue,
+                            currentState.score2
+                        )
+
                 }
             } else {
                 val oldValue = currentState.score2
                 val newValue = oldValue + 1
                 _state.value = currentState.copy(score2 = newValue)
                 if (newValue >= WINNER_SCORE) {
-                    _state.value = TeamScoreState.Winner(
-                        winnerTeam = Team.TEAM_2,
-                        currentState.score1,
-                        newValue
-                    )
+                    _state.value =
+                        TeamScoreState.Winner(
+                            winnerTeam = Team.TEAM_2,
+                            currentState.score1,
+                            newValue
+                        )
+
                 }
             }
         }
+
+
     }
 
     companion object {
